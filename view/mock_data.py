@@ -12,7 +12,7 @@ mock_classes = [
     (10, "Co so du lieu"),
 ]
 
-# Dữ liệu giả cho danh sách học sinh (dựa trên bảng students)
+# Dữ liệu giả cho danh sách học sinh (dựa trên bảng students và studentsofclass)
 mock_students = [
     (1, "Dang Anh Nguyen", "123456709", "male", "Cau truc du lieu"),
     (2, "Le Thi Thuy Kieu", "987654321", "female", "Cau truc du lieu"),
@@ -20,12 +20,12 @@ mock_students = [
     (4, "Do Van Minh Tai", "112233", "male", "Cau truc du lieu"),
 ]
 
-# Dữ liệu giả cho thông tin chi tiết của học sinh (dựa trên bảng students)
+# Dữ liệu giả cho thông tin chi tiết của học sinh (dựa trên bảng students, với photo_path là URL ảnh từ internet)
 mock_student_details = [
-    (1, "Dang Anh Nguyen", "123456709", "male", "Cau truc du lieu", "2025-05-18", None),
-    (2, "Le Thi Thuy Kieu", "987654321", "female", "Cau truc du lieu", "2025-05-15", None),
-    (3, "Dang Tran Tan Luc", "112233445", "male", "Cau truc du lieu", "2025-05-15", None),
-    (4, "Do Van Minh Tai", "112233", "male", "Cau truc du lieu", "2025-05-15", None),
+    (1, "Dang Anh Nguyen", "123456709", "male", "Cau truc du lieu", "2005-05-18", "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"),
+    (2, "Le Thi Thuy Kieu", "987654321", "female", "Cau truc du lieu", "2005-05-15", "https://images.unsplash.com/photo-1494790108377-be9c29b29330"),
+    (3, "Dang Tran Tan Luc", "112233445", "male", "Cau truc du lieu", "2005-05-15", "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"),
+    (4, "Do Van Minh Tai", "112233", "male", "Cau truc du lieu", "2005-05-15", "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7"),
 ]
 
 # Dữ liệu giả cho thống kê điểm danh (dựa trên bảng studentsInSessions và classes)
@@ -37,7 +37,7 @@ mock_class_statistics = (
         "Python": 6,
         "Lap trinh mang": 6,
         "Lap trinh web": 0,
-        "OOP": 0,
+        "OOP": 1,
         "Ly thuyet do thi": 0,
         "AI": 0,
         "Chuyen de Java": 0,
@@ -49,7 +49,7 @@ mock_class_statistics = (
         "Python": 6,
         "Lap trinh mang": 6,
         "Lap trinh web": 12,
-        "OOP": 12,
+        "OOP": 11,
         "Ly thuyet do thi": 12,
         "AI": 12,
         "Chuyen de Java": 12,
@@ -65,9 +65,6 @@ mock_attendance_data = [
     ("Toan roi rac", 1, "Dang Anh Nguyen", "Buoi 2", "2024-11-09"),
     ("Toan roi rac", 2, "Le Thi Thuy Kieu", "Buoi 2", "2024-11-09"),
     ("Toan roi rac", 3, "Dang Tran Tan Luc", "Buoi 2", "2024-11-09"),
-    ("Toan roi rac", 1, "Dang Anh Nguyen", "Buoi 3", "2024-11-10"),
-    ("Toan roi rac", 2, "Le Thi Thuy Kieu", "Buoi 3", "2024-11-10"),
-    ("Toan roi rac", 3, "Dang Tran Tan Luc", "Buoi 3", "2024-11-10"),
     ("Python", 1, "Dang Anh Nguyen", "Buoi 1", "2024-11-14"),
     ("Python", 2, "Le Thi Thuy Kieu", "Buoi 1", "2024-11-14"),
     ("Python", 3, "Dang Tran Tan Luc", "Buoi 1", "2024-11-14"),
@@ -99,7 +96,6 @@ mock_no_attendance_data = [
     ("Cau truc du lieu", 4, "Do Van Minh Tai", "Buoi 3", "2024-11-03"),
     ("Toan roi rac", 4, "Do Van Minh Tai", "Buoi 1", "2024-11-08"),
     ("Toan roi rac", 4, "Do Van Minh Tai", "Buoi 2", "2024-11-09"),
-    ("Toan roi rac", 4, "Do Van Minh Tai", "Buoi 3", "2024-11-10"),
     ("Python", 4, "Do Van Minh Tai", "Buoi 1", "2024-11-14"),
     ("Python", 4, "Do Van Minh Tai", "Buoi 2", "2024-11-15"),
     # Tiếp tục với các buổi khác...
