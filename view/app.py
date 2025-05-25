@@ -8,7 +8,7 @@ import Global
 from mock_data import (
     mock_classes, mock_students, mock_class_statistics, 
     mock_attendance_data, mock_no_attendance_data, 
-    mock_student_details, mock_sessions, mock_recognition_data
+    mock_student_details, mock_sessions
 )
 
 # CSS tùy chỉnh để tái tạo giao diện PyQt6
@@ -17,23 +17,15 @@ st.markdown("""
     /* Màu nền tổng thể */
     .main {
         background-color: lightblue;
-        padding: 0;
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
     
     /* Panel chính */
     .panel {
         background-color: white;
         border-radius: 10px;
-        width: 1200px;
-        height: 700px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
+        padding: 15px;
+        width: 1150px;
+        margin: 0 auto;
     }
     
     /* Header panel */
@@ -45,14 +37,12 @@ st.markdown("""
         display: flex;
         align-items: center;
         padding: 5px 10px;
-        height: 50px;
-        box-sizing: border-box;
+        margin-bottom: 10px;
     }
     
     .header-panel .time-date {
         font-size: 12px;
         font-weight: bold;
-        width: 150px;
     }
     
     .header-panel .title {
@@ -63,17 +53,11 @@ st.markdown("""
     }
     
     .header-panel .logout-btn {
-        width: 100px;
-        text-align: right;
-    }
-    
-    .header-panel .logout-btn button {
         font-size: 14px;
         font-weight: bold;
-        padding: 5px 10px;
+        padding: 5px;
         background-color: transparent;
         border: none;
-        cursor: pointer;
     }
     
     /* Main widget */
@@ -81,37 +65,22 @@ st.markdown("""
         background-color: white;
         width: 1150px;
         height: 600px;
-        margin: 25px auto 0 auto;
-        box-sizing: border-box;
-        overflow-y: auto;
+        margin: 0 auto;
     }
     
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
-        padding: 0 25px;
     }
     
     .stTabs [data-baseweb="tab"] {
         padding: 5px 10px;
         border-bottom: 1px solid transparent;
-        font-size: 14px;
-        font-weight: bold;
     }
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
         background-color: white;
         border-bottom: 1px solid #0078D7;
-    }
-    
-    /* Sub-tabs */
-    .sub-tabs .stTabs [data-baseweb="tab-list"] {
-        padding: 0 10px;
-    }
-    
-    .sub-tabs .stTabs [data-baseweb="tab"] {
-        padding: 5px 10px;
-        font-size: 12px;
     }
     
     /* Biểu đồ */
@@ -121,21 +90,12 @@ st.markdown("""
         border-radius: 10px;
         padding: 10px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        margin: 10px;
-        width: fit-content;
-        height: fit-content;
     }
     
     /* Bảng dữ liệu */
-    .stDataFrame {
-        width: 100%;
-        margin: 10px 0;
-    }
-    
     .stDataFrame table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 12px;
     }
     
     .stDataFrame th, .stDataFrame td {
@@ -154,10 +114,7 @@ st.markdown("""
         color: white;
         border: none;
         border-radius: 5px;
-        padding: 5px 10px;
-        font-size: 12px;
-        width: 100%;
-        box-sizing: border-box;
+        padding: 10px;
     }
     
     button[kind="primary"]:hover {
@@ -170,100 +127,31 @@ st.markdown("""
         border: 1px solid #CCCCCC;
         border-radius: 4px;
         padding: 5px;
-        font-size: 12px;
-        width: 100%;
-        box-sizing: border-box;
     }
     
     /* Selectbox */
     .stSelectbox > div > div {
         border: 1px solid #CCCCCC;
         border-radius: 4px;
-        padding: 4px;
-        font-size: 12px;
-    }
-    
-    /* DateInput */
-    .stDateInput > div > input {
-        border: 1px solid #CCCCCC;
-        border-radius: 4px;
-        padding: 5px;
-        font-size: 12px;
-        width: 100%;
+        padding: 6px;
     }
     
     /* Group box */
     .group-box {
         border: 1px solid gray;
         padding: 10px;
-        margin: 10px;
+        margin-top: 10px;
         border-radius: 5px;
-        background-color: white;
-        height: calc(100% - 40px);
-        box-sizing: border-box;
     }
     
     .group-box-title {
         font-weight: bold;
-        font-size: 14px;
         margin-bottom: 10px;
-        text-align: center;
-    }
-    
-    /* Khu vực ảnh nhận diện */
-    .recognition-image {
-        width: 700px;
-        height: 360px;
-        border: 1px solid black;
-        margin: 10px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f0f0f0;
-    }
-    
-    .recognition-image img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-    }
-    
-    /* Khu vực ảnh khuôn mặt */
-    .face-image {
-        width: 150px;
-        height: 150px;
-        border: 1px solid gray;
-        margin: 10px auto;
-        display: block;
-        object-fit: cover;
-    }
-    
-    /* Thanh tìm kiếm */
-    .search-bar {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 10px;
-        align-items: center;
-    }
-    
-    .search-bar .stTextInput {
-        flex-grow: 1;
-    }
-    
-    /* Cột trong group box */
-    .group-box-col {
-        height: 100%;
-    }
-    
-    /* Khoảng cách giữa các phần tử */
-    .spacer {
-        height: 10px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Thiết lập giao diện chính
-st.markdown('<div class="main">', unsafe_allow_html=True)
+# Thiết lập tiêu đề và giao diện chính
 st.markdown('<div class="panel">', unsafe_allow_html=True)
 
 # Header panel
@@ -276,13 +164,11 @@ with col1:
 with col2:
     st.markdown('<div class="title">Hệ thống nhận diện khuôn mặt</div>', unsafe_allow_html=True)
 with col3:
-    st.markdown('<div class="logout-btn">', unsafe_allow_html=True)
     if st.button("Đăng xuất", key="logout"):
         Global.GLOBAL_ACCOUNT = None
         Global.GLOBAL_ACCOUNTID = None
         st.session_state["logged_in"] = False
         st.experimental_rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Main widget
@@ -293,7 +179,6 @@ tabs = st.tabs(["Thống kê", "Quản lý học sinh", "Quản lý lớp học"
 
 # Tab 1: Thống kê
 with tabs[0]:
-    st.markdown('<div class="sub-tabs">', unsafe_allow_html=True)
     sub_tabs = st.tabs(["Thống kê", "Học sinh đã điểm danh", "Học sinh vắng"])
 
     # Tab Thống kê
@@ -336,7 +221,6 @@ with tabs[0]:
         else:
             df = pd.DataFrame(mock_attendance_data, columns=["Tên lớp", "ID SV", "Tên Học sinh", "Buổi", "Ngày"])
             
-            st.markdown('<div class="search-bar">', unsafe_allow_html=True)
             search_col, button_col1, button_col2, button_col3 = st.columns([3, 1, 1, 1])
             with search_col:
                 search_text = st.text_input("ID Học sinh hoặc tên lớp học", key="attendance_search")
@@ -355,7 +239,6 @@ with tabs[0]:
                         file_name="hoc_sinh_diem_danh.xlsx",
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     )
-            st.markdown('</div>', unsafe_allow_html=True)
             
             if search_text:
                 filtered_df = df[df["ID SV"].astype(str).str.contains(search_text, case=False) | 
@@ -372,7 +255,6 @@ with tabs[0]:
         else:
             df = pd.DataFrame(mock_no_attendance_data, columns=["Tên lớp", "ID SV", "Tên Học sinh", "Buổi", "Ngày"])
             
-            st.markdown('<div class="search-bar">', unsafe_allow_html=True)
             search_col, button_col1, button_col2, button_col3 = st.columns([3, 1, 1, 1])
             with search_col:
                 search_text = st.text_input("ID Học sinh hoặc tên lớp học", key="no_attendance_search")
@@ -391,7 +273,6 @@ with tabs[0]:
                         file_name="hoc_sinh_vang.xlsx",
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     )
-            st.markdown('</div>', unsafe_allow_html=True)
             
             if search_text:
                 filtered_df = df[df["ID SV"].astype(str).str.contains(search_text, case=False) | 
@@ -399,28 +280,21 @@ with tabs[0]:
                 st.dataframe(filtered_df, use_container_width=True)
             else:
                 st.dataframe(df, use_container_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
 
 # Tab 2: Quản lý học sinh
 with tabs[1]:
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.markdown('<div class="group-box group-box-col">', unsafe_allow_html=True)
+        st.markdown('<div class="group-box">', unsafe_allow_html=True)
         st.markdown('<div class="group-box-title">Thông tin Học sinh</div>', unsafe_allow_html=True)
         
         st.text_input("ID Học sinh:", key="student_id")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         st.text_input("Tên Học sinh:", key="student_name")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         st.text_input("Lớp học:", key="student_class")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         st.text_input("CCCD:", key="student_cccd")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
-        st.selectbox("Giới tính:", ["male", "female"], key="student_gender")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
+        st.selectbox("Giới tính:", ["nam", "nữ"], key="student_gender")
         st.date_input("Ngày sinh:", value=datetime.today(), key="student_dob")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
@@ -433,10 +307,9 @@ with tabs[1]:
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="group-box group-box-col">', unsafe_allow_html=True)
+        st.markdown('<div class="group-box">', unsafe_allow_html=True)
         st.markdown('<div class="group-box-title">Hệ Thống Tìm kiếm</div>', unsafe_allow_html=True)
         
-        st.markdown('<div class="search-bar">', unsafe_allow_html=True)
         filter_col, search_col, btn_col = st.columns([2, 2, 1])
         with filter_col:
             class_options = ["Tất cả các lớp"] + [c[1] for c in mock_classes]
@@ -445,7 +318,6 @@ with tabs[1]:
             search_id = st.text_input("Tìm kiếm theo ID:", key="search_student_id")
         with btn_col:
             st.button("Tìm kiếm", key="search_student_btn")
-        st.markdown('</div>', unsafe_allow_html=True)
         
         if search_id:
             if selected_class == "Tất cả các lớp":
@@ -471,22 +343,16 @@ with tabs[2]:
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.markdown('<div class="group-box group-box-col">', unsafe_allow_html=True)
+        st.markdown('<div class="group-box">', unsafe_allow_html=True)
         st.markdown('<div class="group-box-title">Thông tin buổi học</div>', unsafe_allow_html=True)
         
         st.text_input("ID Buổi học:", key="session_id")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         st.text_input("Tên Buổi học:", key="session_name")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         st.text_input("Giờ bắt đầu:", key="start_time")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         st.text_input("Giờ kết thúc:", key="end_time")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         st.date_input("Ngày:", value=datetime.today(), key="session_date")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         class_names = [c[1] for c in mock_classes]
         st.selectbox("Lớp:", class_names, key="session_class")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
 
         btn_col1, btn_col2, btn_col3 = st.columns(3)
         with btn_col1:
@@ -501,7 +367,6 @@ with tabs[2]:
             if st.button("Lưu", key="save_session"):
                 st.success("Buổi học đã được lưu (giả lập).")
 
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
         btn_col4, btn_col5 = st.columns(2)
         with btn_col4:
             if st.button("Sửa", key="edit_session"):
@@ -513,10 +378,9 @@ with tabs[2]:
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="group-box group-box-col">', unsafe_allow_html=True)
+        st.markdown('<div class="group-box">', unsafe_allow_html=True)
         st.markdown('<div class="group-box-title">Hệ Thống Tìm kiếm</div>', unsafe_allow_html=True)
         
-        st.markdown('<div class="search-bar">', unsafe_allow_html=True)
         search_col, btn_col1, btn_col2 = st.columns([3, 1, 1])
         with search_col:
             search_keyword = st.text_input("Tìm kiếm theo tên lớp:", key="search_session")
@@ -524,7 +388,6 @@ with tabs[2]:
             st.button("Tìm kiếm", key="search_session_btn")
         with btn_col2:
             st.button("Xem tất cả", key="view_all_sessions")
-        st.markdown('</div>', unsafe_allow_html=True)
 
         if search_keyword:
             results = [s for s in mock_sessions if search_keyword.lower() in s[2].lower()]
@@ -544,25 +407,21 @@ with tabs[3]:
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.markdown('<div class="group-box group-box-col">', unsafe_allow_html=True)
+        st.markdown('<div class="group-box">', unsafe_allow_html=True)
         st.markdown('<div class="group-box-title">Màn hình nhận diện</div>', unsafe_allow_html=True)
         
         col_class, col_session = st.columns(2)
         with col_class:
-            st.text_input("Lớp:", value="Cau truc du lieu", key="recognition_class", disabled=True)
+            st.text_input("Lớp:", value="Lớp 10A", key="recognition_class", disabled=True)
         with col_session:
-            st.text_input("Buổi:", value="Buoi 1", key="recognition_session", disabled=True)
+            st.text_input("Buổi:", value="Buổi 1", key="recognition_session", disabled=True)
 
         sub_tabs = st.tabs(["Nhận diện", "Thông tin điểm danh"])
         with sub_tabs[0]:
             uploaded_file = st.file_uploader("Tải ảnh lên", type=["png", "jpg", "jpeg", "bmp"])
-            st.markdown('<div class="recognition-image">', unsafe_allow_html=True)
             if uploaded_file:
                 image = Image.open(uploaded_file)
-                st.image(image, use_column_width=True)
-            else:
-                st.write("Chưa có ảnh được tải lên")
-            st.markdown('</div>', unsafe_allow_html=True)
+                st.image(image, caption="Ảnh đã tải lên", use_column_width=True, width=700)
 
         with sub_tabs[1]:
             if "attendance_data" not in st.session_state:
@@ -585,23 +444,16 @@ with tabs[3]:
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="group-box group-box-col">', unsafe_allow_html=True)
+        st.markdown('<div class="group-box">', unsafe_allow_html=True)
         st.markdown('<div class="group-box-title">Nhận diện sinh viên</div>', unsafe_allow_html=True)
         
-        # Hiển thị ảnh khuôn mặt
-        selected_student = mock_student_details[0]  # Giả lập học sinh đầu tiên
-        if selected_student[6]:  # Kiểm tra photo_path
-            st.image(selected_student[6], caption="Khuôn mặt nhận diện", width=150, output_format="auto", use_column_width=False, clamp=True)
-        else:
-            st.markdown('<div class="face-image"></div>', unsafe_allow_html=True)
+        st.image([], caption="Khuôn mặt nhận diện", use_column_width=True)
         
         st.markdown('<div class="group-box">', unsafe_allow_html=True)
         st.markdown('<div class="group-box-title">Điểm danh thành công</div>', unsafe_allow_html=True)
         current_time = datetime.now().strftime("%H:%M:%S")
-        st.text_input("ID sinh viên:", value=str(selected_student[0]), disabled=True, key="recognition_id")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
-        st.text_input("Tên sinh viên:", value=selected_student[1], disabled=True, key="recognition_name")
-        st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
+        st.text_input("ID sinh viên:", value="1", disabled=True, key="recognition_id")
+        st.text_input("Tên sinh viên:", value="Nguyễn Văn A", disabled=True, key="recognition_name")
         st.text_input("Thời gian:", value=current_time, disabled=True, key="recognition_time")
         st.markdown('</div>', unsafe_allow_html=True)
         
@@ -609,4 +461,3 @@ with tabs[3]:
 
 st.markdown('</div>', unsafe_allow_html=True)  # Đóng main-widget
 st.markdown('</div>', unsafe_allow_html=True)  # Đóng panel
-st.markdown('</div>', unsafe_allow_html=True)  # Đóng main
